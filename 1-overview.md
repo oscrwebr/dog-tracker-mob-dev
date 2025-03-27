@@ -21,6 +21,13 @@ The manager side would include:
 
 Notifications will be sent to the customer and manager about upcoming bookings and messages they receive.
 
+**Pet Tracker App** with features such as:
+- Pet profiles: Users can add/edit pets and upload details like their name/breed/age/veterinary information and profile picture
+- Photo gallery: Users can have an in-app photo gallery of all their favourite pet photos
+- Appointment tracker: Users can log any appointments they have for their pet such as 
+- Activity tracker: Users are able to log their activities with their pet such as walks/
+
+
 <!-- 
 
 Interesting – I've not seen a app like this proposed before. I think there's plenty of scope here to build a straightforward MVP and then expand from there. Here are some thoughts:
