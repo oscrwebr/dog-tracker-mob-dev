@@ -3,16 +3,13 @@
 
 Student ID: `c23035992`
 
-**Pet Tracker App** with features such as:
-1. Pet profiles: 
-- Users can add/edit pets and upload details like their name/breed/age/veterinary information and profile picture
-2. Photo gallery: 
-- Users can have an in-app photo gallery of all their favourite pet photos
-3. Appointment tracker: 
-- Users can log any appointments they have for their pet such as veterinary/grooming appointments
+**Pet Tracker App**
+- _Pet profiles_: Users can add/edit pets and upload details like their name/breed/age/veterinary information and profile picture
+- _Photo gallery_: Users can have an in-app photo gallery of all their favourite pet photos
+- _Appointment tracker_: Users can log any appointments they have for their pet such as veterinary/grooming appointments
+- _Activity tracker_: Users are able to log their activities with their pet such as walks/meals (this will work like a calender functionality where you can select a day and see the activities that occured on that day)
 
-4. Activity tracker:
-- Users are able to log their activities with their pet such as walks/meals (this will work like a calender functionality where you can select a day and see the activities that occured on that day)
+Notifications can also be implemented as reminders for appointments or pet birthdays.
 
 
 <!-- 
