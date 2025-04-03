@@ -3,23 +3,14 @@
 
 Student ID: `c23035992`
 
-**Dog Daycare App** where customers can:
-- Manage and upload their pet(s) information (e.g Upload a profile picture, select their breed, view medical information etc.)
-- Create appointments for a dog day care service (walks, sleepovers etc.)
-- Track upcoming appointment information
-- Manage contact information 
-- Send and receive messages to/from the Dog Daycare manager
-- View invoices for each service
+**Pet Tracker App**
+- _Pet profiles_: Users can add/edit pets and upload details like their name/breed/age/veterinary information and profile picture
+- _Photo gallery_: Users can have an in-app photo gallery of all their favourite pet photos
+- _Appointment tracker_: Users can log any appointments they have for their pet such as veterinary/grooming appointments
+- _Activity tracker_: Users are able to log their activities with their pet such as walks/meals (this will work like a calender functionality where you can select a day and see the activities that occured on that day)
 
-I'm not quite sure whether this module requires just the customer side or including a "manager" side too. (Login with different view permissions)
+Notifications can also be implemented as reminders for appointments or pet birthdays.
 
-The manager side would include:
-- View all appointments
-- View messages from each customer
-- View all customers and pets
-- Send invoices to customers
-
-Notifications will be sent to the customer and manager about upcoming bookings and messages they receive.
 
 <!-- 
 
