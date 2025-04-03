@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">mob-dev-portfolio</string>
+    <string name="gallery">Gallery</string>
+    <string name="appointments">Appointments</string>
+    <string name="activity">Activity</string>
+    <string name="pets">Pets</string>
 </resources>
