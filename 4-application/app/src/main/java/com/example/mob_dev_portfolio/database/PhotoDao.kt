@@ -14,4 +14,7 @@ interface PhotoDao {
     @Query("SELECT * FROM photo_table ORDER BY photoId ASC")
     fun getPhotos(): LiveData<List<Photo>>
 
+    @Query("UPDATE photo_table SET name = :changedName WHERE photoId = :photoId")
+    fun changeName(changedName: String, photoId: Int)
+
 }

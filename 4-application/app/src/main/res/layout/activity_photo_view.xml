@@ -28,6 +28,30 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:srcCompat="@drawable/arrow_back" />
+
+        <TextView
+            android:id="@+id/photoViewText"
+            android:layout_width="339dp"
+            android:layout_height="47dp"
+            android:layout_marginTop="15dp"
+            android:gravity="center"
+            android:text="@string/give_your_photo_a_name"
+            android:textColor="#DEDEDE"
+            android:textSize="30sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/changeNameButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/change_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/photoViewText" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ImageView
@@ -39,5 +63,58 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/photo_library" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/popUp"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="#A8A8A8"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+
+        <Button
+            android:id="@+id/submitButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="110dp"
+            android:layout_marginBottom="41dp"
+            android:backgroundTint="#FDFDFD"
+            android:text="@string/submit"
+            android:textColor="#000000"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <Button
+            android:id="@+id/cancelButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="110dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="41dp"
+            android:backgroundTint="#525252"
+            android:text="@string/cancel"
+            android:textColor="#000000"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/submitButton"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <EditText
+            android:id="@+id/editPhotoName"
+            android:layout_width="339dp"
+            android:layout_height="48dp"
+            android:layout_marginBottom="45dp"
+            android:ems="10"
+            android:gravity="center"
+            android:inputType="text"
+            android:hint="@string/edit_name"
+            android:textSize="25sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,9 +10,9 @@
         android:title="@string/activity"
         android:icon="@drawable/footprint"/>
 
-    <item android:id="@+id/appointments"
-        android:title="@string/appointments"
-        android:icon="@drawable/event"/>
+    <item android:id="@+id/meals"
+        android:title="@string/meals"
+        android:icon="@drawable/food"/>
 
     <item android:id="@+id/gallery"
         android:title="@string/gallery"

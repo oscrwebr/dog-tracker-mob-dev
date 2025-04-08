@@ -26,4 +26,9 @@
     <string name="photo_s_added">Photo(s) added!</string>
     <string name="pet_gallery">Pet Gallery</string>
     <string name="title_activity_photo_view">PhotoViewActivity</string>
+    <string name="give_your_photo_a_name">Give your photo a name!</string>
+    <string name="change_name">Change Name</string>
+    <string name="submit">SUBMIT</string>
+    <string name="edit_name">Edit Name</string>
+    <string name="meals">Meals</string>
 </resources>

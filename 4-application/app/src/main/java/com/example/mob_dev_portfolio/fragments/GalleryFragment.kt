@@ -36,7 +36,7 @@ class GalleryFragment : Fragment() {
             for (i in uris ) {
                 val selectedImagePath = saveSelectedImage(i)
 
-                val newPhoto = Photo(0, selectedImagePath)
+                val newPhoto = Photo(0, null, selectedImagePath)
                 insertPhoto(newPhoto)
             }
             // Toast learning: https://developer.android.com/reference/android/widget/Toast?hl=en
@@ -73,7 +73,7 @@ class GalleryFragment : Fragment() {
         photoAdapter.setOnClickListener(object: PhotoAdapter.OnClickListener {
             override fun onClick(position: Int, model: Photo) {
                 val intent = Intent(requireContext(),PhotoViewActivity::class.java)
-                intent.putExtra(NEXT_SCREEN,model.photo)
+                intent.putExtra(NEXT_SCREEN,model)
                 startActivity(intent)
             }
         })
