@@ -7,6 +7,7 @@ import androidx.room.PrimaryKey
 data class Walk (
     @PrimaryKey
     val walkId: Int,
+    val petId: Int,
     val walkName: String,
     val date: String,
     val time: String,

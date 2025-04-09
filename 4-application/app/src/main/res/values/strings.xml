@@ -36,4 +36,11 @@
     <string name="MY_API_KEY">AIzaSyD_zTotsZX5A9y3CVs7iv598W-rd-kt4t0</string>
     <string name="select_your_walk_route">Select your walk route</string>
     <string name="addwalkactivity">AddWalkActivity</string>
+    <string name="back">Back</string>
+    <string name="next">Next</string>
+    <string name="no_pictures_selected">No pictures selected</string>
+    <string name="walk_name">Walk Name</string>
+    <string name="add_walk">Add Walk</string>
+    <string name="walk_time">Walk Time</string>
+    <string name="walk_date">Walk Date</string>
 </resources>

@@ -18,6 +18,14 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import android.Manifest
 import android.annotation.SuppressLint
+import android.app.DatePickerDialog
+import android.app.TimePickerDialog
+import android.icu.util.Calendar
+import android.widget.ArrayAdapter
+import com.example.mob_dev_portfolio.database.PetAppDatabase
+import com.google.android.gms.maps.model.Marker
+import com.google.android.gms.maps.model.Polyline
+import com.google.android.gms.maps.model.PolylineOptions
 
 // Google Maps API Reference to: CodingZest Google Maps in Android 2023 (Link: https://www.youtube.com/watch?v=pOKPQ8rYe6g&list=PLHQRWugvckFrWppucVnQ6XhiJyDbaCU79)
 class AddWalkActivity : AppCompatActivity(), OnMapReadyCallback  {
@@ -25,15 +33,25 @@ class AddWalkActivity : AppCompatActivity(), OnMapReadyCallback  {
     private lateinit var binding: ActivityAddWalkBinding
     private lateinit var myMap: GoogleMap
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
+    private lateinit var datePickerDialog: DatePickerDialog
     private var currentLocation: Location? = null
     private val defaultLocation = LatLng(51.4837, -3.1681)
     private var locationPermissionGranted = false
+    private val db by lazy { PetAppDatabase.getDatabase(this)}
+    private val calendar: Calendar = Calendar.getInstance()
+
+
+    private val markers: ArrayList<LatLng> = ArrayList()
+    private var polyline: Polyline? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAddWalkBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+        backButtonHandler()
+        spinnerHandler()
+        datePicker()
         // Reference to Current Place Tutorial from Google Maps SDK Documentation: https://developers.google.com/maps/documentation/android-sdk/current-place-tutorial
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
 
@@ -45,10 +63,12 @@ class AddWalkActivity : AppCompatActivity(), OnMapReadyCallback  {
         mapFragment.getMapAsync(this)
     }
 
+
     override fun onMapReady(googleMap: GoogleMap) {
         myMap = googleMap
         showCurrentLocation()
         getLocation()
+        mapRouteHandler()
     }
 
 
@@ -67,6 +87,20 @@ class AddWalkActivity : AppCompatActivity(), OnMapReadyCallback  {
                     }
                 }
             }
+        }
+    }
+
+    fun mapRouteHandler() {
+        myMap.setOnMapClickListener { markerPosition ->
+            myMap.addMarker(MarkerOptions().position(markerPosition))
+            markers.add(markerPosition)
+
+            if(markers.size > 1) {
+                polyline = myMap.addPolyline(PolylineOptions().addAll(markers))
+            }
+
+
+
         }
     }
 
@@ -108,6 +142,59 @@ class AddWalkActivity : AppCompatActivity(), OnMapReadyCallback  {
             currentLocation = null
         }
     }
+
+    private fun backButtonHandler() {
+        binding.backButton.setOnClickListener {
+            finish()
+            myMap.clear()
+            markers.clear()
+            polyline = null
+        }
+    }
+
+    // Spinner handler partly based on: https://developer.android.com/develop/ui/views/components/spinner
+    // Adapted to fetch from database
+    private fun spinnerHandler() {
+        db.petDao().getPets().observe(this) { pets ->
+            val petNames = pets.map { it.name }
+
+            val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, petNames)
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            binding.spinner.adapter = adapter
+        }
+        val selectedPet = binding.spinner.selectedItemPosition
+
+    }
+    // Function taken from my AddPetFragment class
+    private fun datePicker() {
+        binding.walkDateEt.setOnClickListener{
+            val currentYear = calendar.get(Calendar.YEAR)
+            val currentMonth = calendar.get(Calendar.MONTH)
+            val currentDay = calendar.get(Calendar.DAY_OF_MONTH)
+
+            datePickerDialog = DatePickerDialog(this, { _, year, month, day ->
+                val selectedDate = "$day/${month + 1}/$year"
+                binding.walkDateEt.setText(selectedDate)
+            }, currentYear, currentMonth, currentDay)
+            datePickerDialog.show()
+
+        }
+    }
+    // TimePickerDialog Pop Up adapted from: https://www.youtube.com/watch?v=8vY_svhd0Uo
+    private fun timePicker() {
+        binding.walkTimeEt.setOnClickListener{
+            val hours = calendar.get(Calendar.HOUR_OF_DAY)
+            val minutes = calendar.get(Calendar.MINUTE)
+            val timePickerDialog = TimePickerDialog(this, {_, hour, minute ->
+                val selectedTime = "$hour:$minute"
+                binding.walkTimeEt.setText(selectedTime)
+
+            }, hours, minutes, true)
+            timePickerDialog.show()
+        }
+    }
+
+
 
 
     companion object {

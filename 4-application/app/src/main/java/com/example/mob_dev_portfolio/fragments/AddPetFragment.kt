@@ -44,7 +44,7 @@ class AddPetFragment : Fragment() {
             binding.profilePictureSelect.setImageURI(uri)
         } else {
             Toast.makeText(requireContext(),
-                getString(R.string.no_media_selected), Toast.LENGTH_SHORT).show()
+                getString(R.string.no_pictures_selected), Toast.LENGTH_SHORT).show()
         }
     }
 
