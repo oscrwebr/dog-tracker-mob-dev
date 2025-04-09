@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mob_dev_portfolio.R
 import com.example.mob_dev_portfolio.database.PetAppDatabase
 import com.example.mob_dev_portfolio.databinding.FragmentPetBinding
-import com.example.mob_dev_portfolio.fragments.adapters.PetAdapter
+import com.example.mob_dev_portfolio.adapters.PetAdapter
 
 class PetFragment : Fragment() {
 

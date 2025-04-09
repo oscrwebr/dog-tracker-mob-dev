@@ -31,4 +31,9 @@
     <string name="submit">SUBMIT</string>
     <string name="edit_name">Edit Name</string>
     <string name="meals">Meals</string>
+    <string name="walks">Walks</string>
+    <string name="select_a_date">Select a date</string>
+    <string name="MY_API_KEY">AIzaSyD_zTotsZX5A9y3CVs7iv598W-rd-kt4t0</string>
+    <string name="select_your_walk_route">Select your walk route</string>
+    <string name="addwalkactivity">AddWalkActivity</string>
 </resources>

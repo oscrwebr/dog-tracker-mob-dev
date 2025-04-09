@@ -18,7 +18,7 @@ import com.example.mob_dev_portfolio.R
 import com.example.mob_dev_portfolio.database.PetAppDatabase
 import com.example.mob_dev_portfolio.database.Photo
 import com.example.mob_dev_portfolio.databinding.FragmentGalleryBinding
-import com.example.mob_dev_portfolio.fragments.adapters.PhotoAdapter
+import com.example.mob_dev_portfolio.adapters.PhotoAdapter
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext

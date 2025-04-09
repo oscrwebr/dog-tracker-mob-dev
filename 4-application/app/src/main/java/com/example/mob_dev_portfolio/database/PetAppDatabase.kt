@@ -6,11 +6,12 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 
 // Room Database Learning from Stevdza-San ROOM Database Tutorial 2020 (Link: https://www.youtube.com/watch?v=lwAvI3WDXBY&list=PLSrm9z4zp4mEPOfZNV9O-crOhoMa0G2-o)
-@Database(entities = [Pet::class, Photo::class], version = 6)
+@Database(entities = [Pet::class, Photo::class, Walk::class], version = 7)
 abstract class PetAppDatabase: RoomDatabase() {
 
     abstract fun petDao(): PetDao
     abstract fun photoDao(): PhotoDao
+    abstract fun walkDao(): WalkDao
 
     companion object{
         @Volatile

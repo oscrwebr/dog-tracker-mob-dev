@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.mob_dev_portfolio.databinding.ActivityMainBinding
-import com.example.mob_dev_portfolio.fragments.ActivityFragment
+import com.example.mob_dev_portfolio.fragments.WalksFragment
 import com.example.mob_dev_portfolio.fragments.MealsFragment
 import com.example.mob_dev_portfolio.fragments.GalleryFragment
 import com.example.mob_dev_portfolio.fragments.PetFragment
@@ -26,12 +26,11 @@ class MainActivity : AppCompatActivity() {
 
             when(it.itemId){
                 R.id.pets -> replaceFragment(PetFragment())
-                R.id.activity -> replaceFragment(ActivityFragment())
+                R.id.walks -> replaceFragment(WalksFragment())
                 R.id.meals -> replaceFragment(MealsFragment())
                 R.id.gallery -> replaceFragment(GalleryFragment())
 
                 else -> {
-
                 }
             }
             true

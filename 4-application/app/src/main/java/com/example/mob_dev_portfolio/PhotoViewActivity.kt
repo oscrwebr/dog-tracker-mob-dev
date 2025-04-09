@@ -38,6 +38,7 @@ class PhotoViewActivity : AppCompatActivity() {
     }
 
     private fun photoViewActivityHandler() {
+        // Intent tutorial partly based on: https://www.geeksforgeeks.org/how-to-apply-onclicklistener-to-recyclerview-items-in-android/
         val photoExtra = intent.getSerializableExtra(GalleryFragment.NEXT_SCREEN) as? Photo
 
         // Reference to my PhotoAdapter image URI setter

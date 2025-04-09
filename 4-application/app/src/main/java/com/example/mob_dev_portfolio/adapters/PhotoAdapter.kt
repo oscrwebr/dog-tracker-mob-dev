@@ -1,4 +1,4 @@
-package com.example.mob_dev_portfolio.fragments.adapters
+package com.example.mob_dev_portfolio.adapters
 
 import android.net.Uri
 import android.view.LayoutInflater

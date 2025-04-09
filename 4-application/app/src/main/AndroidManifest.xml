@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
-
+    
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -14,6 +16,11 @@
             android:label="@string/title_activity_photo_view"
             android:theme="@style/Theme.Mobdevportfolio" />
         <activity
+            android:name=".AddWalkActivity"
+            android:exported="false"
+            android:label="@string/addwalkactivity"
+            android:theme="@style/Theme.Mobdevportfolio" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
@@ -22,6 +29,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+<!--        Google API Documentation: https://developers.google.com/maps/documentation/android-sdk/config-->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/MY_API_KEY"/>
     </application>
 
 </manifest>
