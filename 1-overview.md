@@ -3,13 +3,12 @@
 
 Student ID: `c23035992`
 
-**Pet Tracker App**
-- _Pet profiles_: Users can add/edit pets and upload details like their name/breed/age/veterinary information and profile picture
-- _Photo gallery_: Users can have an in-app photo gallery of all their favourite pet photos
-- _Appointment tracker_: Users can log any appointments they have for their pet such as veterinary/grooming appointments
-- _Activity tracker_: Users are able to log their activities with their pet such as walks/meals (this will work like a calender functionality where you can select a day and see the activities that occured on that day)
+**Dog Tracker App**
+If you've ever had a pet, you will know how complicated things get when trying to keep track of everything, be it walks you take with your dog, meals they eat, important information or even your favourite pictures of them. The app I'm building looks to organise everything into one Dog Tracker App.
 
-Notifications can also be implemented as reminders for appointments or pet birthdays.
+There will be four areas of navigation in the app. The Pets section will show a list of all your dogs and give the user the ability to add dogs and see their information.
+
+The Walks section will give you the ability to track your walk, including the route you took, as well as the time and date of the walk. The Meals section will be similar to the Walks section, giving the user the ability to track their pets meals to know what to feed them and what could potentially be causing illness. The Gallery Section will show all the photos the user uploads of their pets, organising their pet pictures into one gallery. This can also be done within the Android Photos app via albums, but streamlining everything pet related into one app makes things easier for the user.
 
 
 <!-- 
