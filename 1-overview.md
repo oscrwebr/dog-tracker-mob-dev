@@ -4,6 +4,7 @@
 Student ID: `c23035992`
 
 **Dog Tracker App**
+
 If you've ever had a pet, you will know how complicated things get when trying to keep track of everything, be it walks you take with your dog, meals they eat, important information or even your favourite pictures of them. The app I'm building looks to organise everything into one Dog Tracker App.
 
 There will be four areas of navigation in the app. The Pets section will show a list of all your dogs and give the user the ability to add dogs and see their information.
