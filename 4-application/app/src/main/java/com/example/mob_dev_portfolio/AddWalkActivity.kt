@@ -173,6 +173,7 @@ class AddWalkActivity : AppCompatActivity(), OnMapReadyCallback  {
             val petNames = pets.map {it.name}
 
             if(petNames.isEmpty()) {
+                // Showing error messages and disabling spinner if there no pets in database
                 binding.noPetsInDatabase.visibility = android.view.View.VISIBLE
                 binding.pleaseGoBack.visibility = android.view.View.VISIBLE
                 binding.spinner.visibility = android.view.View.GONE
