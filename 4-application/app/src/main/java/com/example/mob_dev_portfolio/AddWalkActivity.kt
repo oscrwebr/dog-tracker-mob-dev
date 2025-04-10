@@ -175,9 +175,11 @@ class AddWalkActivity : AppCompatActivity(), OnMapReadyCallback  {
             if(petNames.isEmpty()) {
                 binding.noPetsInDatabase.visibility = android.view.View.VISIBLE
                 binding.pleaseGoBack.visibility = android.view.View.VISIBLE
+                binding.spinner.visibility = android.view.View.GONE
             } else {
                 binding.noPetsInDatabase.visibility = android.view.View.GONE
                 binding.pleaseGoBack.visibility = android.view.View.GONE
+                binding.spinner.visibility = android.view.View.VISIBLE
 
 
                 val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, petNames)

@@ -16,4 +16,7 @@ interface PetDao {
 
     @Query("SELECT * FROM pet_table ORDER BY id ASC")
     fun getPets(): LiveData<List<Pet>>
+
+    @Query("DELETE FROM pet_table WHERE id=:id")
+    fun deletePet(id: Int)
 }

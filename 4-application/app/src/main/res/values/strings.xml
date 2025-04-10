@@ -58,4 +58,6 @@
     <string name="date_of_birth_colon">Date of Birth:</string>
     <string name="gender_colon">Gender:</string>
     <string name="pet_type_colon">Pet Type:</string>
+    <string name="delete">Delete</string>
+    <string name="pet_deleted">Pet deleted</string>
 </resources>
