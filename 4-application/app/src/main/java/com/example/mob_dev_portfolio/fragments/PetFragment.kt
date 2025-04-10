@@ -11,6 +11,7 @@ import com.example.mob_dev_portfolio.R
 import com.example.mob_dev_portfolio.database.PetAppDatabase
 import com.example.mob_dev_portfolio.databinding.FragmentPetBinding
 import com.example.mob_dev_portfolio.adapters.PetAdapter
+import com.example.mob_dev_portfolio.database.Pet
 
 class PetFragment : Fragment() {
 
@@ -49,6 +50,24 @@ class PetFragment : Fragment() {
         db.petDao().getPets().observe(viewLifecycleOwner, Observer { pets ->
             petAdapter.updatePets(pets)
         })
+
+        // Bundle learning: https://stackoverflow.com/questions/4999991/what-is-a-bundle-in-an-android-application
+        petAdapter.setOnClickListener(object: PetAdapter.OnClickListener {
+            override fun onClick(position: Int, model: Pet) {
+                val bundle = Bundle()
+                bundle.putSerializable(PET_SELECTED, model)
+                val viewPetFragment = ViewPetFragment()
+                viewPetFragment.arguments = bundle
+                val fragmentManager = parentFragmentManager.beginTransaction()
+                fragmentManager.replace(R.id.fragmentContainerView, viewPetFragment)
+                fragmentManager.addToBackStack(null)
+                fragmentManager.commit()
+            }
+        })
+    }
+
+    companion object {
+        val PET_SELECTED = "pet_selected"
     }
 
 

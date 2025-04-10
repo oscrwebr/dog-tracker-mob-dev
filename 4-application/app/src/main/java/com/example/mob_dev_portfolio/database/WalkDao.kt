@@ -9,7 +9,7 @@ import androidx.room.Query
 @Dao
 interface WalkDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun addWalk (walk: Walk)
+    suspend fun addWalk (walk: Walk)
 
     @Query("SELECT * from walks_table WHERE date = :calendarDate")
     fun getWalksOnDate(calendarDate: String): LiveData<List<Walk>>

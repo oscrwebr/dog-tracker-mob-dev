@@ -41,7 +41,7 @@ class WalksAdapter(private var walksList: List<Walk>, private var petsList: List
         val binding: WalksRowBinding = WalksRowBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return WalksViewHolder(binding)
     }
-    fun setOnClickListener(onClickListener: com.example.mob_dev_portfolio.adapters.WalksAdapter.OnClickListener) {
+    fun setOnClickListener(onClickListener: OnClickListener) {
         this.onClickListener = onClickListener
     }
     // RecyclerView OnClickListener adapted from: https://www.geeksforgeeks.org/how-to-apply-onclicklistener-to-recyclerview-items-in-android/

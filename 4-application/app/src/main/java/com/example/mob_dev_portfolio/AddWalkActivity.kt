@@ -35,7 +35,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-// Google Maps API Reference to: CodingZest Google Maps in Android 2023 (Link: https://www.youtube.com/watch?v=pOKPQ8rYe6g&list=PLHQRWugvckFrWppucVnQ6XhiJyDbaCU79)
+// Google Maps API Learning Reference to: CodingZest Google Maps in Android 2023 Tutorial on Youtube (Link: https://www.youtube.com/watch?v=pOKPQ8rYe6g&list=PLHQRWugvckFrWppucVnQ6XhiJyDbaCU79)
 class AddWalkActivity : AppCompatActivity(), OnMapReadyCallback  {
 
     private lateinit var binding: ActivityAddWalkBinding

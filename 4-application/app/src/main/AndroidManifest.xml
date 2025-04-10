@@ -10,6 +10,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Mobdevportfolio">
+        <activity android:name=".ViewWalkActivity"
+            android:exported="false"
+            android:label="@string/title_activity_view_walk"
+            android:theme="@style/Theme.Mobdevportfolio" />
+        <activity android:name=".AddMealActivity"
+            android:exported="false"
+            android:label="@string/addmealactivity"
+            android:theme="@style/Theme.Mobdevportfolio" />
         <activity
             android:name=".PhotoViewActivity"
             android:exported="false"

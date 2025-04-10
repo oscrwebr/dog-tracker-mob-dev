@@ -4,13 +4,12 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import java.io.Serializable
 
-@Entity(tableName = "walks_table")
-data class Walk (
+@Entity(tableName = "meals_table")
+data class Meal (
     @PrimaryKey(autoGenerate = true)
-    val walkId: Int,
+    val mealId: Int,
     val petId: Int,
-    val walkName: String,
-    val date: String,
-    val time: String,
-    val walkRoute: String
+    val mealName: String,
+    val mealDate: String,
+    val mealTime: String,
 ) : Serializable
