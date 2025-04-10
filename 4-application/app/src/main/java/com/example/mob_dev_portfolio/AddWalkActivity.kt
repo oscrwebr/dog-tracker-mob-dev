@@ -223,8 +223,6 @@ class AddWalkActivity : AppCompatActivity(), OnMapReadyCallback  {
     private fun addWalkButtonHandler() {
         binding.nextButton.setOnClickListener {
             insertWalk()
-
-            Toast.makeText(this, getString(R.string.walk_added), Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -238,12 +236,13 @@ class AddWalkActivity : AppCompatActivity(), OnMapReadyCallback  {
         val time = binding.walkTimeEt.text.toString()
         val walkRoute = markersToJson()
 
-        if(name.isNotEmpty() && date.isNotEmpty() && time.isNotEmpty() && walkRoute.isNotEmpty()) {
+        if(name.isNotEmpty() && date.isNotEmpty() && time.isNotEmpty() && walkRoute.isNotEmpty() && markers.isNotEmpty()) {
             lifecycleScope.launch {
                 withContext(Dispatchers.IO) {
                     val newWalk = Walk(0, selectedPetId, name, date, time, walkRoute)
                     db.walkDao().addWalk(newWalk)
                 }
+            Toast.makeText(this@AddWalkActivity, getString(R.string.walk_added), Toast.LENGTH_SHORT).show()
 
             }
         } else {
