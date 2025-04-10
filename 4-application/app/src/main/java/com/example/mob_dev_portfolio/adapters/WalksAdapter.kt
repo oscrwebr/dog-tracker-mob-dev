@@ -10,7 +10,7 @@ import com.example.mob_dev_portfolio.database.Walk
 import com.example.mob_dev_portfolio.databinding.WalksRowBinding
 import java.io.File
 
-class WalksAdapter(private var walksList: List<Walk>, private var petsList: List<Pet>): RecyclerView.Adapter<WalksAdapter.WalksViewHolder>() {
+class WalksAdapter(private var walksList: List<Walk>, private var petsList: List<Pet>, private var onClickListener: OnClickListener? = null): RecyclerView.Adapter<WalksAdapter.WalksViewHolder>() {
 
     class WalksViewHolder(val binding: WalksRowBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(walk: Walk, pet: Pet) {
@@ -41,6 +41,13 @@ class WalksAdapter(private var walksList: List<Walk>, private var petsList: List
         val binding: WalksRowBinding = WalksRowBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return WalksViewHolder(binding)
     }
+    fun setOnClickListener(onClickListener: com.example.mob_dev_portfolio.adapters.WalksAdapter.OnClickListener) {
+        this.onClickListener = onClickListener
+    }
+    // RecyclerView OnClickListener adapted from: https://www.geeksforgeeks.org/how-to-apply-onclicklistener-to-recyclerview-items-in-android/
+    interface OnClickListener {
+        fun onClick(position: Int, model: Walk)
+    }
 
     fun updateWalks(newWalks: List<Walk>, newPets: List<Pet>) {
         this.walksList = newWalks
@@ -56,5 +63,8 @@ class WalksAdapter(private var walksList: List<Walk>, private var petsList: List
         val currentItem = walksList[position]
         val currentPet = petsList.find { pet -> pet.id == currentItem.petId }
         holder.bind(currentItem, currentPet!!)
+        holder.itemView.setOnClickListener {
+            onClickListener?.onClick(position, currentItem)
+        }
     }
 }

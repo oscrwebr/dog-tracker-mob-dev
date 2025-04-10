@@ -31,6 +31,7 @@ class GalleryFragment : Fragment() {
     private lateinit var photoAdapter: PhotoAdapter
 
     // Code adapted from: https://developer.android.com/training/data-storage/shared/photopicker
+    // Saves each photo selected and then stores in database
     private val pickMedia = registerForActivityResult(ActivityResultContracts.PickMultipleVisualMedia()) { uris ->
         if (!uris.isNullOrEmpty()) {
             for (i in uris ) {
@@ -60,16 +61,19 @@ class GalleryFragment : Fragment() {
         galleryHandler()
     }
 
+    // Handles the recycler view in the gallery fragment
     private fun galleryHandler() {
         photoAdapter = PhotoAdapter(emptyList())
         binding.photoRecycler.layoutManager = GridLayoutManager(requireContext(), 3)
 
         binding.photoRecycler.adapter = photoAdapter
         // PhotoPicker adapted from: https://developer.android.com/training/data-storage/shared/photopicker
+        // When the add button is clicked, launches pickMedia activity
         binding.galleryButton.setOnClickListener {
             pickMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
         }
         // Code adapted from: https://www.geeksforgeeks.org/how-to-apply-onclicklistener-to-recyclerview-items-in-android/
+        // Setting an onClickListener for each item in the recycler view
         photoAdapter.setOnClickListener(object: PhotoAdapter.OnClickListener {
             override fun onClick(position: Int, model: Photo) {
                 val intent = Intent(requireContext(),PhotoViewActivity::class.java)
@@ -78,6 +82,7 @@ class GalleryFragment : Fragment() {
             }
         })
 
+        // Observe the photos in the database and update the recycler view
         db.photoDao().getPhotos().observe(viewLifecycleOwner, Observer { photos ->
             photoAdapter.updatePhotos(photos)
         })
@@ -89,7 +94,7 @@ class GalleryFragment : Fragment() {
         val NEXT_SCREEN="photo_screen"
     }
 
-    //
+    // Saves URI to storage (otherwise URIs do not persist over sessions and cause errors)
     private fun saveSelectedImage(uri: Uri): String {
         val inputStream = requireContext().contentResolver.openInputStream(uri)
         val fileName = "photo_${System.currentTimeMillis()}.jpg"

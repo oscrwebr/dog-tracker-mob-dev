@@ -35,6 +35,7 @@ class AddPetFragment : Fragment() {
     private var selectedImage: Uri? = null
     private var selectedImagePath: String? = null
     // Code adapted from: https://developer.android.com/training/data-storage/shared/photopicker
+    // Saves each photo selected and then stores in database
     private val pickMedia = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
         if (uri != null) {
             selectedImage = uri
@@ -64,12 +65,15 @@ class AddPetFragment : Fragment() {
         profilePictureHandler()
     }
 
+    // Function to select profile picture for the pet
     private fun profilePictureHandler() {
         binding.chooseImageButton.setOnClickListener {
+            // Launches pickMedia activity
             pickMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
         }
     }
 
+    // Saves URI to storage (otherwise URIs do not persist over sessions and cause errors)
     private fun saveSelectedImage(uri: Uri): String {
         val inputStream = requireContext().contentResolver.openInputStream(uri)
         val fileName = "pet_${System.currentTimeMillis()}.jpg"
@@ -83,11 +87,14 @@ class AddPetFragment : Fragment() {
 
     private fun datePicker() {
         binding.dobEt.setOnClickListener{
+            // Get current date from Calendar instance (calendar)
             val currentYear = calendar.get(Calendar.YEAR)
             val currentMonth = calendar.get(Calendar.MONTH)
             val currentDay = calendar.get(Calendar.DAY_OF_MONTH)
 
+            // Launches the DatePickerDialog (essentially a popup date picker)
             datePickerDialog = DatePickerDialog(requireContext(), { _, year, month, day ->
+                // Format the date
                 val selectedDate = "$day/${month + 1}/$year"
                 binding.dobEt.setText(selectedDate)
             }, currentYear, currentMonth, currentDay)
@@ -96,14 +103,17 @@ class AddPetFragment : Fragment() {
         }
     }
 
+
     private fun cancelButton() {
         binding.cancelBtn.setOnClickListener {
+            // When cancel button is clicked, go back to the previous fragment
             parentFragmentManager.popBackStack()
         }
     }
 
     private fun addButton() {
         binding.addBtn.setOnClickListener {
+            // Getting values from the input fields
             val name = binding.nameEt.text.toString()
             val petType = binding.petTypeEt.text.toString()
             val breed = binding.breedEt.text.toString()
@@ -112,7 +122,9 @@ class AddPetFragment : Fragment() {
             val profilePicture = selectedImagePath
 
 
+            // Checking values aren't left empty by the user (apart from profilePicture)
             if (name.isNotEmpty() && petType.isNotEmpty() && breed.isNotEmpty() && dateOfBirth.isNotEmpty() && gender.isNotEmpty()) {
+                // Inserting into database (id = 0 as our id in the table is set to auto generate)
                 val newPet = Pet(0, name, petType, breed, dateOfBirth, gender, profilePicture)
                 insertPet(newPet)
             }
@@ -123,6 +135,7 @@ class AddPetFragment : Fragment() {
 
     }
     // Coroutine learning: https://developer.android.com/kotlin/coroutines
+    // Function inserting pet into database using coroutines
     private fun insertPet(pet: Pet) {
         lifecycleScope.launch {
             withContext(Dispatchers.IO) {

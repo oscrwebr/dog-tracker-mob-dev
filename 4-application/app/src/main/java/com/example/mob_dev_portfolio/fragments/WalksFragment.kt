@@ -36,6 +36,7 @@ class WalksFragment : Fragment() {
         calendarClickHandler()
     }
 
+    // Function for the floating action button (takes us to the AddWalkActivity)
     private fun floatingButtonHandler() {
         binding.addWalksFab.setOnClickListener{
             val intent = Intent(requireContext(), AddWalkActivity::class.java)
@@ -43,13 +44,14 @@ class WalksFragment : Fragment() {
         }
     }
 
+    // Setting adapter for recycler view
     private fun adapterHandler() {
         walksAdapter = WalksAdapter(emptyList(), emptyList())
         binding.walksRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.walksRecyclerView.adapter = walksAdapter
     }
 
-    // Updates the recyclerView with the walks on the selected date
+    // Updates the recycler view with the walks on the selected date
     private fun recyclerViewHandler(selectedDate: String) {
         db.petDao().getPets().observe(viewLifecycleOwner) { pets ->
             db.walkDao().getWalksOnDate(selectedDate).observe(viewLifecycleOwner) { walks ->
@@ -57,6 +59,11 @@ class WalksFragment : Fragment() {
             }
         }
     }
+
+//    private fun recyclerViewClickListener() {
+//        walksAdapter.setOnClickListener
+//    }
+
     // Fetches the date of the current date selected in the Calendar View, and performs the recyclerViewHandler function
     // Code adapted from: https://stackoverflow.com/questions/16031314/how-can-i-get-selected-date-in-calenderview-in-android
     private fun calendarClickHandler() {
