@@ -17,14 +17,18 @@ class PetAdapter(private var petList: List<Pet>): RecyclerView.Adapter<PetAdapte
             binding.petName.text = pet.name
             binding.petBreed.text = pet.breed
 
+            // Check if profile picture isn't null in database (user hasn't given a profile picture)
             if (!pet.profilePicture.isNullOrBlank()) {
                 val file = File(pet.profilePicture)
                 if(file.exists()) {
+                    // Setting image URI for the profile picture image view
                     binding.profileImage.setImageURI(Uri.fromFile(file))
                 } else {
+                    // Otherwise give a default drawable image
                     binding.profileImage.setImageResource(R.drawable.profile_picture)
                 }
             } else {
+                // Otherwise give a default drawable image
                 binding.profileImage.setImageResource(R.drawable.profile_picture)
             }
 

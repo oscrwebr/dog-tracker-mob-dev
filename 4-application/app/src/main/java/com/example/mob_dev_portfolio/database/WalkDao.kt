@@ -11,6 +11,10 @@ interface WalkDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun addWalk (walk: Walk)
 
-    @Query("SELECT * from walks_table WHERE date = :calendarDate ORDER BY time ASC")
+    @Query("SELECT * from walks_table WHERE date = :calendarDate")
     fun getWalksOnDate(calendarDate: String): LiveData<List<Walk>>
+
+    @Query("SELECT * FROM walks_table ORDER BY walkId ASC")
+    fun getWalks(): LiveData<List<Walk>>
+
 }

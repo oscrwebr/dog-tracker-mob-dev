@@ -43,4 +43,10 @@
     <string name="add_walk">Add Walk</string>
     <string name="walk_time">Walk Time</string>
     <string name="walk_date">Walk Date</string>
+    <string name="walk_added">Walk added!</string>
+    <string name="remember_to_fill_in_all_fields">Remember to fill in all fields!</string>
+    <string name="please_go_back">Please go back.</string>
+    <string name="no_pets_in_database">No pets in database!</string>
+    <string name="_13_30">13:30</string>
+    <string name="_10_03_2025">10/03/2025</string>
 </resources>

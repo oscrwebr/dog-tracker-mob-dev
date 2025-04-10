@@ -22,10 +22,18 @@ import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.icu.util.Calendar
 import android.widget.ArrayAdapter
+import android.widget.Toast
+import androidx.lifecycle.lifecycleScope
+import com.example.mob_dev_portfolio.database.Pet
 import com.example.mob_dev_portfolio.database.PetAppDatabase
+import com.example.mob_dev_portfolio.database.Walk
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.Polyline
 import com.google.android.gms.maps.model.PolylineOptions
+import com.google.gson.Gson
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 // Google Maps API Reference to: CodingZest Google Maps in Android 2023 (Link: https://www.youtube.com/watch?v=pOKPQ8rYe6g&list=PLHQRWugvckFrWppucVnQ6XhiJyDbaCU79)
 class AddWalkActivity : AppCompatActivity(), OnMapReadyCallback  {
@@ -44,6 +52,8 @@ class AddWalkActivity : AppCompatActivity(), OnMapReadyCallback  {
     private val markers: ArrayList<LatLng> = ArrayList()
     private var polyline: Polyline? = null
 
+    private var petObjects: List<Pet> = emptyList()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAddWalkBinding.inflate(layoutInflater)
@@ -52,6 +62,8 @@ class AddWalkActivity : AppCompatActivity(), OnMapReadyCallback  {
         backButtonHandler()
         spinnerHandler()
         datePicker()
+        timePicker()
+        addWalkButtonHandler()
         // Reference to Current Place Tutorial from Google Maps SDK Documentation: https://developers.google.com/maps/documentation/android-sdk/current-place-tutorial
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
 
@@ -156,13 +168,24 @@ class AddWalkActivity : AppCompatActivity(), OnMapReadyCallback  {
     // Adapted to fetch from database
     private fun spinnerHandler() {
         db.petDao().getPets().observe(this) { pets ->
-            val petNames = pets.map { it.name }
 
-            val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, petNames)
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            binding.spinner.adapter = adapter
+            petObjects = pets
+            val petNames = pets.map {it.name}
+
+            if(petNames.isEmpty()) {
+                binding.noPetsInDatabase.visibility = android.view.View.VISIBLE
+                binding.pleaseGoBack.visibility = android.view.View.VISIBLE
+            } else {
+                binding.noPetsInDatabase.visibility = android.view.View.GONE
+                binding.pleaseGoBack.visibility = android.view.View.GONE
+
+
+                val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, petNames)
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                binding.spinner.adapter = adapter
+            }
         }
-        val selectedPet = binding.spinner.selectedItemPosition
+
 
     }
     // Function taken from my AddPetFragment class
@@ -192,6 +215,46 @@ class AddWalkActivity : AppCompatActivity(), OnMapReadyCallback  {
             }, hours, minutes, true)
             timePickerDialog.show()
         }
+    }
+
+    private fun addWalkButtonHandler() {
+        binding.nextButton.setOnClickListener {
+            insertWalk()
+
+            Toast.makeText(this, getString(R.string.walk_added), Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun insertWalk() {
+        val selectedPetPosition = binding.spinner.selectedItemPosition
+        val selectedPet = petObjects[selectedPetPosition]
+        val selectedPetId = selectedPet.id
+
+        val name = binding.walkNameEt.text.toString()
+        val date = binding.walkDateEt.text.toString()
+        val time = binding.walkTimeEt.text.toString()
+        val walkRoute = markersToJson()
+
+        if(name.isNotEmpty() && date.isNotEmpty() && time.isNotEmpty() && walkRoute.isNotEmpty()) {
+            lifecycleScope.launch {
+                withContext(Dispatchers.IO) {
+                    val newWalk = Walk(0, selectedPetId, name, date, time, walkRoute)
+                    db.walkDao().addWalk(newWalk)
+                }
+
+            }
+        } else {
+            Toast.makeText(this, getString(R.string.remember_to_fill_in_all_fields), Toast.LENGTH_SHORT).show()
+        }
+        myMap.clear()
+        markers.clear()
+        polyline = null
+
+    }
+    // Reference to: https://google.github.io/gson/UserGuide.html#using-gson-with-gradleandroid
+    private fun markersToJson(): String {
+        val markersJson = Gson().toJson(markers)
+        return markersJson
     }
 
 

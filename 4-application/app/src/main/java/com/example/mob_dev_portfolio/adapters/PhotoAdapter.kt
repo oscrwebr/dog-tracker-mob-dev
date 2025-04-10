@@ -22,7 +22,6 @@ class PhotoAdapter(private var photoList: List<Photo>, private var onClickListen
         return PhotoViewHolder(binding)
     }
 
-    // Setter for the click listener
     fun setOnClickListener(onClickListener: OnClickListener) {
         this.onClickListener = onClickListener
     }
